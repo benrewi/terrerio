@@ -1,0 +1,89 @@
+.navbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    background-color: var(--color-green);
+    font-family: var(--font-body);
+    padding: 0.3rem 4rem;
+    border-bottom: 1px solid var(--color-gold);
+    z-index: 10;
+}
+
+.nav-left{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-left span{
+    font-family: var(--font-heading);
+    color: var(--color-gold);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+
+}
+.nav-left a{
+    text-decoration: none;
+}
+
+.nav-left img{
+    max-width: 60px;
+    height: auto;
+}
+
+.nav-right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.navbar ul{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    list-style-type: none;
+    color: var(--color-white);
+    margin: 0;
+    padding: 0;
+    
+}
+
+.navbar ul li{
+    padding: 0 20px;
+}
+
+.nav-links{
+    width: 100%;
+}
+
+.nav-links a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.nav-right .current a{
+    color: var(--color-gold);
+    border-bottom: 2px solid var(--color-gold);
+    padding-bottom: 0.3rem;
+}
+
+.cta{
+    background-color: var(--color-green);
+  border: 1px solid var(--color-gold);
+  color: black;
+  padding: 8px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+}

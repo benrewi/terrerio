@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terreiro de Ògún – Candomblé Australia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-green: #123524;
+    --color-gold: #CFB53B;
+    --color-white: #ffffff;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+
+    /* derived tints (same hues, for backgrounds and borders only) */
+    --green-soft: #f2f6f3;
+    --green-line: rgba(18,53,36,.14);
+    --nav-h: 76px;
+    --max: 1180px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body); font-weight: 400;
+    color: var(--color-green); background: var(--color-white);
+    line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- Navbar ---------- */
+  .navbar {
+    position: relative; z-index: 50;   /* normal flow: sits at the top and scrolls away with the page */
+    background: var(--color-green);
+    border-bottom: 2px solid var(--color-gold);
+  }
+  .navbar .wrap { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .brand-mark {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1.5px solid var(--color-gold); color: var(--color-gold);
+    display: grid; place-items: center;
+    font-family: var(--font-heading); font-size: 22px; font-weight: 600;
+  }
+  .brand-name { font-family: var(--font-heading); font-size: 21px; font-weight: 600; color: var(--color-gold); line-height: 1.15; }
+  .brand-name small { display: block; font-family: var(--font-body); font-size: 10px; font-weight: 400; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-top: 3px; }
+  .nav-links { display: flex; align-items: center; gap: 34px; list-style: none; }
+  .nav-links a {
+    color: var(--color-white); text-decoration: none; font-size: 13px; font-weight: 500;
+    letter-spacing: .14em; text-transform: uppercase; padding: 6px 0;
+    border-bottom: 2px solid transparent; transition: color .2s, border-color .2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--color-gold); border-color: var(--color-gold); }
+  .nav-links a.cta { border: 1.5px solid var(--color-gold); color: var(--color-gold); padding: 10px 22px; border-radius: 999px; }
+  .nav-links a.cta:hover { background: var(--color-gold); color: var(--color-green); }
+  .nav-toggle, .nav-burger { display: none; }
+
+  /* ---------- Hero (scroll-driven parallax) ---------- */
+  .hero-wrapper {
+    position: relative; width: 100%; height: 110vh; overflow: clip;
+    display: grid; align-items: center;
+    view-timeline-name: --hero-scroll; view-timeline-axis: block;
+  }
+  .hero-img {                 /* same size as the hero (no extra zoom); 5vh of spare image above covers the first bit of drift */
+    position: absolute; left: 0; top: -5vh; width: 100%; height: calc(100% + 5vh);
+    object-fit: cover; object-position: center; z-index: 0;
+  }
+  .hero-wrapper::after {      /* white wash only: strong behind text, fading to the photo */
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.86) 38%, rgba(255,255,255,.30) 72%, rgba(255,255,255,.08) 100%);
+  }
+  .hero-wrapper > .wrap { position: relative; z-index: 2; width: 100%; }
+  .hero-content { position: relative; top: -10vh; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-img     { animation: hero-img-drift linear both; animation-timeline: --hero-scroll; animation-range: contain 0% exit 100%; }
+    .hero-content { animation: hero-copy-rise linear both; animation-timeline: --hero-scroll; animation-range: contain 0% exit 100%; }
+  }
+  @keyframes hero-img-drift { from { transform: translateY(0); } to { transform: translateY(35vh); } }   /* image lags behind */
+  @keyframes hero-copy-rise { from { transform: translateY(0); } to { transform: translateY(-45vh); } } /* text rises faster */
+
+  /* Content that slides up over the hero at normal speed */
+  .page-content { position: relative; z-index: 2; background: var(--color-white); box-shadow: 0 -14px 34px rgba(18,53,36,.18); }
+
+  .hero-copy { max-width: 580px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 14px; font-size: 12px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; margin-bottom: 24px; }
+  .eyebrow::before { content: ""; width: 44px; height: 2px; background: var(--color-gold); }
+  h1 { font-family: var(--font-heading); font-weight: 600; font-size: clamp(42px, 6vw, 76px); line-height: 1.06; letter-spacing: -.01em; margin-bottom: 24px; }
+  h1 em { font-style: italic; font-weight: 500; }
+  .lead { font-size: 18px; font-weight: 300; max-width: 500px; margin-bottom: 36px; }
+  .buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 14px 32px; border-radius: 999px; text-decoration: none;
+    font-size: 13px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    transition: transform .2s, background .2s, color .2s, box-shadow .2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--color-green); color: var(--color-gold); box-shadow: 0 6px 18px rgba(18,53,36,.25); }
+  .btn-outline { border: 1.5px solid var(--color-green); color: var(--color-green); }
+  .btn-outline:hover { background: var(--color-green); color: var(--color-white); }
+  .btn-gold { background: var(--color-gold); color: var(--color-green); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 112px 0; }
+  .section-head { max-width: 640px; margin-bottom: 56px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  h2 { font-family: var(--font-heading); font-weight: 600; font-size: clamp(32px, 4vw, 46px); line-height: 1.15; margin-bottom: 18px; }
+  .rule { width: 56px; height: 3px; background: var(--color-gold); border-radius: 2px; margin-bottom: 22px; }
+  .center .rule { margin-left: auto; margin-right: auto; }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 1.05fr 1fr; gap: 80px; align-items: center; }
+  .about p { margin-bottom: 18px; font-weight: 300; font-size: 17px; }
+  .about .btn { margin-top: 12px; }
+  .frame { position: relative; }
+  .frame::before { content: ""; position: absolute; inset: 22px -22px -22px 22px; border: 2px solid var(--color-gold); border-radius: 6px; }
+  .frame img { position: relative; border-radius: 6px; aspect-ratio: 4/5; object-fit: cover; width: 100%; box-shadow: 0 20px 50px rgba(18,53,36,.2); }
+
+  /* Pillars (green section) */
+  .pillars { background: var(--color-green); color: var(--color-white); }
+  .pillars h2 { color: var(--color-white); }
+  .pillars .section-head p { color: rgba(255,255,255,.8); font-weight: 300; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .card {
+    padding: 40px 34px; border: 1px solid rgba(207,181,59,.35); border-radius: 8px;
+    background: rgba(255,255,255,.03); transition: border-color .25s, transform .25s, background .25s;
+  }
+  .card:hover { border-color: var(--color-gold); transform: translateY(-4px); background: rgba(255,255,255,.06); }
+  .card .num { font-family: var(--font-heading); font-size: 40px; color: var(--color-gold); line-height: 1; margin-bottom: 18px; }
+  .card h3 { font-family: var(--font-heading); font-size: 24px; font-weight: 600; margin-bottom: 10px; color: var(--color-white); }
+  .card p { font-size: 15px; font-weight: 300; color: rgba(255,255,255,.8); }
+
+  /* Visit / contact */
+  .visit { background: var(--green-soft); }
+  .visit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--green-line); border-radius: 8px; background: var(--color-white); overflow: hidden; }
+  .visit-item { padding: 40px 34px; }
+  .visit-item + .visit-item { border-left: 1px solid var(--green-line); }
+  .visit-item h3 { font-size: 12px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; margin-bottom: 12px; }
+  .visit-item p { font-weight: 300; font-size: 16px; }
+  .visit-cta { text-align: center; margin-top: 48px; }
+
+  /* Footer */
+  footer { background: var(--color-green); color: rgba(255,255,255,.8); border-top: 3px solid var(--color-gold); padding: 72px 0 28px; font-size: 14px; font-weight: 300; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+  footer .brand-name { margin-bottom: 14px; display: block; }
+  footer h4 { font-size: 12px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 16px; }
+  footer ul { list-style: none; }
+  footer li { margin-bottom: 8px; }
+  footer a { text-decoration: none; transition: color .2s; }
+  footer a:hover { color: var(--color-gold); }
+  .legal { border-top: 1px solid rgba(255,255,255,.15); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; color: rgba(255,255,255,.6); }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    section { padding: 72px 0; }
+    .wrap { padding: 0 22px; }
+    .about { grid-template-columns: 1fr; gap: 56px; }
+    .frame::before { inset: 14px -10px -14px 10px; }
+    .cards { grid-template-columns: 1fr; }
+    .visit-grid { grid-template-columns: 1fr; }
+    .visit-item + .visit-item { border-left: 0; border-top: 1px solid var(--green-line); }
+    .foot-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-wrapper::after { background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78)); }
+
+    .nav-burger { display: grid; gap: 5px; cursor: pointer; padding: 8px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--color-gold); }
+    .nav-links {
+      position: absolute; top: var(--nav-h); left: 0; right: 0;
+      flex-direction: column; align-items: flex-start; gap: 0;
+      background: var(--color-green); border-bottom: 2px solid var(--color-gold);
+      max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    }
+    .nav-links li { width: 100%; padding: 0 22px; }
+    .nav-links a { display: inline-block; padding: 14px 0; }
+    .nav-links li:last-child { padding-bottom: 20px; }
+    .nav-toggle:checked ~ .nav-links { max-height: 420px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <div class="brand-mark">Ò</div>
+      <div class="brand-name">Terreiro de Ògún<small>Candomblé Australia</small></div>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+    <ul class="nav-links">
+      <li><a href="#top" class="active">Home</a></li>
+      <li><a href="#who">Who We Are</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact" class="cta">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero-wrapper">
+    <img src="assets/images/hero-img.webp" class="hero-img" alt="">
+    <div class="wrap">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <div class="eyebrow">Candomblé Australia</div>
+          <h1>Welcome to <em>Terreiro de Ògún</em></h1>
+          <p class="lead">A community home for tradition, ancestry and the orixás, offering ceremony, learning and care.</p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="#who">Who We Are</a>
+            <a class="btn btn-outline" href="#contact">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+  <section id="who">
+    <div class="wrap about">
+      <div class="reveal">
+        <div class="eyebrow">Who We Are</div>
+        <h2>Rooted in tradition, open to community</h2>
+        <div class="rule"></div>
+        <p>Placeholder text. Introduce the terreiro here in two or three short paragraphs: who you are, where your lineage comes from, and who is welcome.</p>
+        <p>Keep the tone warm and clear for visitors who are new to Candomblé, and let your own words lead.</p>
+        <a class="btn btn-primary" href="#">Read Our Story</a>
+      </div>
+      <div class="frame reveal"><img src="assets/images/hero-img.webp" alt="Cowrie shells arranged on a woven basket surrounded by beaded necklaces"></div>
+    </div>
+  </section>
+
+  <section class="pillars" id="projects">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <div class="eyebrow" style="color:var(--color-gold)">What We Do</div>
+        <h2>Our work and projects</h2>
+        <div class="rule"></div>
+        <p>Placeholder intro. Summarise the main areas of your work in a sentence or two.</p>
+      </div>
+      <div class="cards">
+        <div class="card reveal"><div class="num">01</div><h3>Tradition</h3><p>Placeholder. Describe ceremonies, practice and the teachings you uphold.</p></div>
+        <div class="card reveal"><div class="num">02</div><h3>Community</h3><p>Placeholder. Describe gatherings, support and how people can take part.</p></div>
+        <div class="card reveal"><div class="num">03</div><h3>Learning</h3><p>Placeholder. Describe workshops, talks and resources for those who want to learn.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="contact">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <div class="eyebrow">Contact</div>
+        <h2>Get in touch</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="visit-grid reveal">
+        <div class="visit-item"><h3>Location</h3><p>Placeholder address<br>City, State, Australia</p></div>
+        <div class="visit-item"><h3>Message us</h3><p>WhatsApp: placeholder<br>Email: placeholder</p></div>
+        <div class="visit-item"><h3>Follow</h3><p>Instagram: @placeholder</p></div>
+      </div>
+      <div class="visit-cta reveal"><a class="btn btn-primary" href="#">Send a Message</a></div>
+    </div>
+  </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="brand-name">Terreiro de Ògún</span>
+        <p>A Candomblé community in Australia.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="#top">Home</a></li><li><a href="#who">Who We Are</a></li><li><a href="#projects">Projects</a></li><li><a href="#contact">Contact</a></li></ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li></ul>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; 2026 Terreiro de Ògún. All rights reserved.</span><span>Candomblé Australia</span></div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
